@@ -20,6 +20,7 @@ class Config:
     drip_amount_wei: int
     cooldown_hours: int
     daily_cap_wei: int
+    pending_timeout_seconds: int
     chain_id: int
 
     @classmethod
@@ -39,6 +40,7 @@ class Config:
         cooldown_hours = int(os.getenv("COOLDOWN_HOURS", "24"))
         daily_cap_eth = Decimal(os.getenv("DAILY_CAP_ETH", "10"))
         daily_cap_wei = int(daily_cap_eth * Decimal(10**18))
+        pending_timeout_seconds = int(os.getenv("PENDING_TIMEOUT_SECONDS", "120"))
         chain_id = int(os.getenv("SEPOLIA_CHAIN_ID", "11155111"))
 
         return cls(
@@ -50,6 +52,7 @@ class Config:
             drip_amount_wei=drip_amount_wei,
             cooldown_hours=cooldown_hours,
             daily_cap_wei=daily_cap_wei,
+            pending_timeout_seconds=pending_timeout_seconds,
             chain_id=chain_id,
         )
 
@@ -59,6 +62,7 @@ class Config:
             f"chain_id={self.chain_id}, "
             f"drip_amount_wei={self.drip_amount_wei}, "
             f"cooldown_hours={self.cooldown_hours}, "
+            f"pending_timeout_seconds={self.pending_timeout_seconds}, "
             f"private_key=****)"
         )
 
