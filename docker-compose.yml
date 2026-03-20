@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: faucet
+      POSTGRES_PASSWORD: faucet
+      POSTGRES_DB: faucet
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  bot:
+    build: .
+    env_file: .env
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
